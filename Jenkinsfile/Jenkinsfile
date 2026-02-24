@@ -1,0 +1,45 @@
+pipeline{
+    agent{
+        label "agent"
+    }
+    stages{
+        stage('Clone Repository'){
+            steps{
+                git branch: 'main', url:'https://github.com/PriyeshPandey07/Visa-advisor-project.git' credentialsID: 'git'
+            }
+        }
+        stage('Install and Migrate'){
+            steps{
+                sh """
+                python3 -m venv venv
+                source venv/bin/activate
+                venv/bin/pip install --upgrade pip
+                venv/bin/pip install -r requirements.txt
+                venv/bin/python manage.py makemigrations || true
+                venv/bin/python manage.py migrate || true
+                """
+            }
+        }
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                       sh "docker build -t visa-advisor ."
+                       sh "docker tag visa-advisor priyeshpandey07/visa-advisor:latest "
+                       sh "docker push priyeshpandey07/visa-advisor:latest "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image priyeshpandey07/visa-advisor:latest > trivy.txt" 
+            }
+        }
+        stage('Deploy to container'){
+            steps{
+                sh 'docker run -d --name visa-advisor -p 5000:5000 priyeshpandey07/visa-advisor:latest'
+            }
+        }
+    }
+}
