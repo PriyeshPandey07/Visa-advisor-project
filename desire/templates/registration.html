@@ -1,0 +1,84 @@
+{% include "header.html" %}
+<div class="container">
+    <div class="row">
+        <!-- First Form -->
+        <div class="col-md-6">
+            <h2 class="mt-5">Registration For Client</h2>
+            <div class="registration-form bg-light mt-4 p-4">
+                <form method="POST" class="row g-3">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Address</label>
+                        <input type="text" name="address" class="form-control" placeholder="Address" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Date of Birth</label>
+                        <input type="date" name="dob" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phonenumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{10}"
+                        title="Mobile number must be 10 digits long. Country code optional." required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary float-right">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Second Form (Copy of the First Form) -->
+        <div class="col-md-6">
+            <h2 class="mt-5">Registration For advisor</h2>
+            <div class="registration-form bg-light mt-4 p-4">
+                <form  method="POST" class="row g-3">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label>Username</label>
+                        <input type="text" name="name" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="col-12">
+                        <label>experience</label>
+                        <input type="text" name="experience" class="form-control" placeholder="Experience" required>
+                    </div>
+                    <div class="col-12">
+                        <label>country specialization</label>
+                        <input type="text" name="country_specialization" class="form-control" placeholder="Country specialization" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Education</label>
+                        <input type="text" name="education" class="form-control" placeholder="Education" required>
+                    </div>
+                    <div class="col-12">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phoneno" class="form-control" placeholder="Phone Number" pattern="[0-9]{10}"
+                        title="Mobile number must be 10 digits long. Country code optional." required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary float-right">Register</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

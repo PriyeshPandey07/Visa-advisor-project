@@ -1,0 +1,42 @@
+{% include "adviseradmin/header.html" %}
+
+
+  <main id="main" class="main">
+
+
+  <div class="card">
+      <div class="card-body">
+            <div class="pagetitle mt-4">
+                  <h1>View suggestions</h1>
+                </div>
+  <table class="table table-bordered border-primary mt-5">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">query</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+        <tr>
+          <th scope="row">{{ i.id }}</th>
+          <td>{{ i.email }}</td>
+          <td>{{ i.query }}</td>
+          
+        </tr>
+        {% empty %}
+        
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+</div>
+</div>
+
+
+</main>
+
+{% include "adviseradmin/footer.html" %}
+

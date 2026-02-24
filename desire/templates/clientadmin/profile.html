@@ -1,0 +1,45 @@
+{% include 'clientadmin/header.html' %}
+
+        
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                           
+
+                            <div class="container">
+                              <div class="profile-card">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h5 class="card-title">User Profile</h5>
+                                  </div>
+                                  <div class="card-body">
+                                    {% comment %} <img src="static/clientadmin/profile-picture.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture"> {% endcomment %}
+                                    <h4 class="card-title"> {{ client.username }}</h4>
+                                    <p class="card-text">email: {{ client.email }}</p>
+                                    <p class="card-text">Phone No: {{ client.phoneno }}</p>
+
+                                    <p class="card-text">Address: {{ client.address }}</p>
+                                    <p class="card-text">DOB : {{  client.dob}}</p>
+                                    <p class="card-text">Password : {{  client.password}}</p>
+
+                                  </div>
+                                  <div class="card-footer">
+                                    <a href="clientproedit" class="btn btn-primary">Edit Profile</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Table End -->
+
+            {% include 'clientadmin/footer.html' %}

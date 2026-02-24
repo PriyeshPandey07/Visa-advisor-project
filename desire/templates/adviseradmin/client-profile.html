@@ -1,0 +1,45 @@
+{% include "adviseradmin/header.html" %}
+
+  <main id="main" class="main">
+
+
+  <div class="card">
+      <div class="card-body">
+            <div class="pagetitle mt-4">
+                  <h1>Client Profile</h1>
+                </div>
+  <table class="table table-bordered border-primary mt-5">
+      <thead>
+        
+
+      
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">address</th>
+          <th scope="col">dob</th>
+          <th scope="col">email</th>
+          <th scope="col">phoneno</th>
+          <th scope="col">password</th>
+        </tr>  
+      </thead>
+      <tbody>
+        {% for i in ru %}
+        <tr>
+          <th scope="row">{{i.id}}</th>
+          <td>{{i.username}}</td>
+          <td>{{i.address}}</td>
+          <td>{{i.dob}}</td>
+          <td>{{i.email}}</td>
+          <td>{{i.phoneno}}</td>
+          <td>{{i.password}}</td>
+        </tr>{% endfor %}
+      </tbody>
+    </table>
+
+</div>
+</div>
+
+
+</main>
+{% include "adviseradmin/footer.html" %}

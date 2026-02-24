@@ -1,0 +1,50 @@
+{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>country specialization</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="table-responsive">
+            <form action="" method="GET">
+                <div class="" style="display: flex;">
+                 
+                <input type="search" name="search" placeholder="search county adviser" class="form-control" required>
+                <button type="submit" class="btn btn-info">search</button>
+                </div>
+            </form>
+          <table class="table custom-table mt-3">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Visaadviser Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phonenumber</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Country Specialization</th>
+                <th scope="col">Education</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in reviews %}
+              <tr>
+                <th scope="row">{{i.id}}</th>
+                <th scope="row">{{i.username}}</th>
+                <td>{{i.email}}</td>
+                <td>{{i.phoneno}}</td>
+                <td>{{i.experience}}</td>
+                <td>{{i.country_specialization}}</td>
+                <td>{{i.education}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+</body>
+</html>
+
+{% comment %} {% include "footer.html" %} {% endcomment %}

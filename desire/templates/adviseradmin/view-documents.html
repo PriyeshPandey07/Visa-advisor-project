@@ -1,0 +1,39 @@
+{% include "adviseradmin/header.html" %}
+
+
+
+  <main id="main" class="main">
+
+
+  <div class="card">
+      <div class="card-body">
+            <div class="pagetitle mt-4">
+                  <h1>View Document</h1>
+                </div>
+  <table class="table table-bordered border-primary mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Adhar Card</th>
+          <th scope="col">Pan Card</th>
+          <th scope="col">Passport</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in data  %}
+        <tr>
+          <td>{{info.email}}</td>
+          <td><img src="media/{{info.aadharcard}}" height="30"><a href="media/{{info.aadharcard}}" download>{{info.aadharcard}}</a></td>
+          <td><img src="media/{{info.paancard}}" height="30"><a href="media/{{info.paancard}}" download>{{info.paancard}}</a></td>
+          <td><img src="media/{{info.passport}}" height="30"><a href="media/{{info.passport}}" download>{{info.passport}} </a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+</div>
+
+
+</main>
+{% include "adviseradmin/footer.html" %}

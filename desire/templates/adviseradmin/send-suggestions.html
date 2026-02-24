@@ -1,0 +1,32 @@
+{% include "adviseradmin/header.html" %}
+
+
+<main id="main" class="main">
+
+
+    <div class="card">
+        <div class="card-body">
+              <div class="pagetitle mt-4">
+                    <h1>Send Suggestion</h1>
+                  </div>
+   
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="query" class="form-label">Query</label>
+                        <input type="text" class="form-control" id="query" name="query">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+  
+  </div>
+  </div>
+  
+  
+  </main>
+
+{% include "adviseradmin/footer.html" %}
