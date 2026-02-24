@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage('Clone Repository'){
             steps{
-                git branch: 'main', url:'https://github.com/PriyeshPandey07/Visa-advisor-project.git' credentialsID: 'git-creds'
+                git branch: 'main', url:'https://github.com/PriyeshPandey07/Visa-advisor-project.git' credentialsId: 'git-creds'
             }
         }
         stage('Install and Migrate'){
