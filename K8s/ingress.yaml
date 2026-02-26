@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: visa-advisor-ingress
+spec:
+  rules:
+  - host: visa-advisor.page.gd
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: visa-advisor-service
+            port:
+              number: 80

@@ -20,23 +20,57 @@ pipeline{
                 '''
             }
         }
-        stage("Docker Build & Push"){
-            steps{
-                script{   
-                       sh "docker build -t visa-advisor ."
-                       sh "docker tag visa-advisor priyeshpandey07/visa-advisor:latest "
-                       sh "docker push priyeshpandey07/visa-advisor:latest "
-                    }
+        stage('Terraform Apply (EKS)') {
+            steps {
+                dir('Terraform') {
+                       sh '''
+                       terraform init
+                       terraform validate
+                       terraform plan
+                       terraform apply -auto-approve
+                      '''
                 }
             }
-        stage("TRIVY"){
+        }
+        stage("ECR Create, Image Build & Push"){
             steps{
-                sh "trivy image priyeshpandey07/visa-advisor:latest > trivy.txt" 
+                script{ 
+                    sh "aws ecr create-repository \
+                        --repository-name visa-advisor \
+                        --region ap-south-1" 
+                    sh "aws ecr get-login-password --region ap-south-1 | \
+                        docker login --username AWS --password-stdin 985671710454.dkr.ecr.ap-south-1.amazonaws.com"
+                    sh "docker build -t visa-advisor ."
+                    sh "docker tag visa-advisor 985671710454.dkr.ecr.ap-south-1.amazonaws.com/visa-advisor:latest"
+                    sh "docker push 985671710454.dkr.ecr.ap-south-1.amazonaws.com/visa-advisor:latest"
+                }
             }
         }
-        stage('Deploy to container'){
+        stage("TRIVY"){
             steps{
-                sh 'docker run -d --name visa-advisor -p 5000:5000 priyeshpandey07/visa-advisor:latest'
+                sh "trivy image 985671710454.dkr.ecr.ap-south-1.amazonaws.com/visa-advisor:latest > trivy.txt" 
+            }
+        }
+        stage('Install Ingress') {
+            steps {
+                sh "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml"
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                dir('K8s') {
+                    sh "kubectl apply -f deployment.yaml"
+                    sh "kubectl apply -f service.yaml"
+                    sh "kubectl apply -f autoscale.yaml"
+                    sh "kubectl apply -f ingress.yaml"
+                }
+            }
+        }
+        stage('Monitoring using Helm') {
+            steps {
+                sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+                sh "helm repo update"
+                sh "helm install monitoring prometheus-community/kube-prometheus-stack"
             }
         }
     }
