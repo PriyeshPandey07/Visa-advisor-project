@@ -52,7 +52,7 @@ pipeline{
                     sh "aws eks update-kubeconfig \
                        --region ap-south-1 \
                        --name visa-advisor-eks"
-                       "kubectl get nodes"
+                    sh "kubectl get nodes"
                 }
             }
         }
