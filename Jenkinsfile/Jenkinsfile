@@ -22,15 +22,13 @@ pipeline{
         }
         stage("Docker Build & Push"){
             steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker'){   
+                script{   
                        sh "docker build -t visa-advisor ."
                        sh "docker tag visa-advisor priyeshpandey07/visa-advisor:latest "
                        sh "docker push priyeshpandey07/visa-advisor:latest "
                     }
                 }
             }
-        }
         stage("TRIVY"){
             steps{
                 sh "trivy image priyeshpandey07/visa-advisor:latest > trivy.txt" 
