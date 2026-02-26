@@ -22,7 +22,12 @@ pipeline{
         }
         stage("ECR Create, Image Build & Push"){
             steps{
-                script{ 
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'vishwa']
+                ]) {
+                    sh "aws sts get-caller-identity"
+                    sh "aws ecr describe-repositories --repository-names visa-advisor \
+                        --region ap-south-1 || true"
                     sh "aws ecr create-repository \
                         --repository-name visa-advisor \
                         --region ap-south-1" 
