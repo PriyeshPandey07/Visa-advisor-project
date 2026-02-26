@@ -22,10 +22,9 @@ pipeline{
         }
         stage('Terraform Apply (EKS)') {
             steps {
-                withCredentials([[
-                $class: 'AmazonWebServicesCredentialsBinding',
-                credentialsId: 'vishwa'
-        ]])
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'vishwa']
+                ])
                 dir('Terraform') {
                        sh '''
                        terraform init
