@@ -20,22 +20,6 @@ pipeline{
                 '''
             }
         }
-        stage('Terraform Apply (EKS)') {
-            steps {
-                withCredentials([
-                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'vishwa']
-                ]) {
-                dir('Terraform') {
-                       sh '''
-                       terraform init
-                       terraform validate
-                       terraform plan
-                       terraform apply -auto-approve
-                      '''
-                    }
-                }
-            }
-        }
         stage("ECR Create, Image Build & Push"){
             steps{
                 script{ 
