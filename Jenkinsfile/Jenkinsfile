@@ -24,7 +24,7 @@ pipeline{
             steps {
                 withCredentials([
                     [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'vishwa']
-                ])
+                ]) {
                 dir('Terraform') {
                        sh '''
                        terraform init
@@ -32,6 +32,7 @@ pipeline{
                        terraform plan
                        terraform apply -auto-approve
                       '''
+                    }
                 }
             }
         }
