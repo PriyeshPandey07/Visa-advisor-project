@@ -46,6 +46,7 @@ pipeline{
         }
         stage('Install Ingress') {
             steps {
+                sh "export KUBECONFIG=/var/lib/jenkins/.kube/config"
                 sh "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml"
             }
         }
