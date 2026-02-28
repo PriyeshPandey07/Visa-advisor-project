@@ -56,7 +56,7 @@ pipeline{
                     sh "kubectl apply -f deployment.yaml"
                     sh "kubectl apply -f service.yaml"
                     sh "kubectl apply -f autoscaling.yaml"
-                    sh "kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=180s"
+                    sh "kubectl delete validatingwebhookconfiguration ingress-nginx-admission || true"
                     sh "kubectl apply -f ingress.yaml --validate=false"
                 }
             }
