@@ -44,18 +44,6 @@ pipeline{
                 sh "trivy image 985671710454.dkr.ecr.ap-south-1.amazonaws.com/visa-advisor:latest > trivy.txt" 
             }
         }
-        stage('Configure kubeconfig (EKS)') {
-            steps {
-                withCredentials([
-                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'vishwa']
-                ]) {
-                    sh "aws eks update-kubeconfig \
-                       --region ap-south-1 \
-                       --name visa-advisor-eks"
-                    sh "kubectl get nodes"
-                }
-            }
-        }
         stage('Install Ingress') {
             steps {
                 sh "kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml"
